@@ -13,7 +13,26 @@
 @tailwind components;
 @tailwind utilities;
 
-/* 3. Apply the font to the whole app (optional) */
+@font-face {
+  font-family: "Bergess";
+  src: local("Bergess"), local("Bergess-Regular");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --font-sans: "Bergess", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji",
+    "Segoe UI Emoji";
+}
+
+html, body, #root {
+  height: 100%;
+}
+
 body {
-  font-family: 'bergesss', sans-serif;
+  font-family: var(--font-sans);
+  background: #ffffff;
+  color: #0f172a;
 }
