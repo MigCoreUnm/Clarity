@@ -1,3 +1,19 @@
+/* src/index.css */
+
+/* 1. Define the custom font */
+@font-face {
+  font-family: 'bergesss';
+  src: url('./assets/fonts/bergesss.woff2') format('woff2'); /* Adjust filename if needed */
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* 2. Add Tailwind's base styles */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* 3. Apply the font to the whole app (optional) */
+body {
+  font-family: 'bergesss', sans-serif;
+}
