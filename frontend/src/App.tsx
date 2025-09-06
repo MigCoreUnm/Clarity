@@ -1,3 +1,5 @@
+
+import { PoliciesPage } from './pages/AllPoliciesPage';
 import React from 'react'
 import MainPage from './pages/MainPage'
 import CardTransactionDetailPage from './pages/CardTransactionDetailPage'
@@ -14,6 +16,8 @@ export default function App() {
     )
   }
 
+function App() {
+  // This bg-gray-50 class is the foundation for the entire look
   return (
     <MainPage onOpenTransaction={setOpenTransactionId} />
   )
