@@ -17,20 +17,20 @@ export const GroupPolicy: React.FC<GroupPolicyProps> = ({ group, onUpdatePolicy 
   };
 
   return (
-    <div className="border-b border-gray-200 py-4">
+    <div className="border-b border-gray-200">
       {/* Group Header - Click to expand/collapse */}
       <div
-        className="flex justify-between items-center cursor-pointer"
+        className="flex justify-between items-center cursor-pointer px-6 py-4 hover:bg-gray-50"
         onClick={() => setIsOpen(!isOpen)}
       >
-        <h2 className="text-2xl font-bold text-gray-800">{group.title}</h2>
-        <span className={`transform transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}>
+        <h2 className="text-base font-medium text-gray-900">{group.title}</h2>
+        <span className={`text-gray-500 transform transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}>
           ▼
         </span>
       </div>
       {/* Collapsible Content */}
       {isOpen && (
-        <div className="mt-4">
+        <div className="mt-2">
           {group.policies.map((policy) => (
             <Policy key={policy.id} policy={policy} onUpdatePolicy={handleUpdate} />
           ))}

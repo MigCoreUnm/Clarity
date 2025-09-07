@@ -14,27 +14,27 @@ export const Policy: React.FC<PolicyProps> = ({ policy, onUpdatePolicy }) => {
   };
 
   return (
-    <div className="ml-8 my-4 p-4 border-l-2 border-gray-200">
+    <div className="px-6 py-4">
       {/* Editable Title */}
       <input
         type="text"
         defaultValue={policy.title}
         onBlur={(e) => handleBlur('title', e.target.value)}
-        className="text-lg font-semibold bg-transparent w-full focus:outline-none focus:bg-gray-100 rounded p-1"
+        className="text-base font-medium text-blackbg-transparent w-full focus:outline-none rounded p-1"
       />
       {/* Editable Description */}
       <textarea
         defaultValue={policy.description}
         onBlur={(e) => handleBlur('description', e.target.value)}
-        className="mt-2 text-gray-700 bg-transparent w-full focus:outline-none focus:bg-gray-100 rounded p-1 h-24"
+        className="mt-1 text-sm text-black bg-transparent w-full focus:outline-none rounded p-1 h-24"
       />
       {/* Editable Hidden Notes */}
-      <div className="mt-4 p-3 bg-gray-50 rounded-md">
-        <p className="text-sm font-medium text-gray-600">Hidden notes</p>
+      <div className="mt-3 p-3 bg-gray-50 rounded-md">
+        <p className="text-xs font-medium text-gray-700">Hidden notes</p>
         <textarea
           defaultValue={policy.hiddenNotes}
           onBlur={(e) => handleBlur('hiddenNotes', e.target.value)}
-          className="mt-1 text-sm text-gray-500 bg-transparent w-full focus:outline-none focus:bg-gray-100 rounded p-1 h-16"
+          className="mt-1 text-sm text-gray-600 bg-transparent w-full focus:outline-none rounded p-1 h-16"
           placeholder="Add internal notes here..."
         />
       </div>

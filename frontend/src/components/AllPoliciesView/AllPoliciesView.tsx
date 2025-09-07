@@ -1,50 +1,25 @@
 // src/components/AllPoliciesView/AllPoliciesView.tsx
 
-import React, { useState } from 'react';
+import React from 'react';
 import type { PolicyGroup as PolicyGroupType } from '../../types2';
-
-// ... (EditIcon component remains the same)
-const EditIcon = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-400 group-hover:text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.5L15.232 5.232z"/>
-    </svg>
-);
 
 interface AllPoliciesViewProps {
     groups: PolicyGroupType[];
     onSelectGroup: (id:string) => void;
     onAddNewGroup: () => void;
     onUpdateGroupTitle: (groupId: string, newTitle: string) => void;
+    onDeleteGroup: (groupId: string) => void;
+    onBack: () => void;
 }
 
-export const AllPoliciesView: React.FC<AllPoliciesViewProps> = ({ groups, onSelectGroup, onAddNewGroup, onUpdateGroupTitle }) => {
-    const [editingGroupId, setEditingGroupId] = useState<string | null>(null);
-    const [currentTitle, setCurrentTitle] = useState('');
-
-    // ... (handler functions remain the same)
-    const handleEditClick = (group: PolicyGroupType) => {
-        setEditingGroupId(group.id);
-        setCurrentTitle(group.title);
-    };
-
-    const handleSave = () => {
-        if (editingGroupId) {
-            onUpdateGroupTitle(editingGroupId, currentTitle);
-        }
-        setEditingGroupId(null);
-    };
-
-    const handleKeyDown = (event: React.KeyboardEvent) => {
-        if (event.key === 'Enter') handleSave();
-        else if (event.key === 'Escape') setEditingGroupId(null);
-    };
+export const AllPoliciesView: React.FC<AllPoliciesViewProps> = ({ groups, onSelectGroup, onAddNewGroup, onUpdateGroupTitle, onDeleteGroup, onBack }) => {
 
 
     return (
-        <div className="relative">
+        <div className="relative min-h-screen bg-white text-gray-900">
             <button
-                onClick={() => alert('Navigate to home page...')}
-                className="sticky top-6 left-6 z-10 bg-white p-2 rounded-full shadow-md text-gray-700 hover:bg-gray-200 hover:text-black transition-all"
+                onClick={onBack}
+                className="sticky top-6 left-6 z-10 bg-transparent p-0 rounded-none text-gray-700 hover:text-black"
             >
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
@@ -54,40 +29,38 @@ export const AllPoliciesView: React.FC<AllPoliciesViewProps> = ({ groups, onSele
             <main className="pt-16 pb-10 px-8">
                 {/* This new container centers the content and controls its width */}
                 <div className="max-w-7xl mx-auto">
-                    <div className="flex justify-between items-center mb-6">
-                        <h2 className="text-3xl font-bold text-gray-900">All Policy Groups</h2>
-                        <button onClick={onAddNewGroup} className="bg-brand-blue text-white font-bold py-2 px-4 rounded-md hover:opacity-90 whitespace-nowrap">
-                            Add New Group
+                    <div className="flex justify-between items-center mb-4">
+                        <h2 className="text-2xl font-semibold tracking-tight text-gray-900">All policies</h2>
+                        <button onClick={onAddNewGroup} className="flex items-center gap-1 rounded-full bg-white border border-gray-200 px-3 py-1.5 text-sm text-gray-700 hover:bg-gray-50 whitespace-nowrap">
+                            Add group
                         </button>
                     </div>
 
-                    <div className="space-y-4">
+                    <div className="relative rounded-none border-y border-gray-200 overflow-hidden divide-y divide-gray-200">
                         {groups.map((group) => (
                             <div
                                 key={group.id}
-                                className="group bg-white flex justify-between items-center p-6 rounded-lg shadow-sm transition-all duration-200 ease-in-out hover:shadow-lg hover:-translate-y-1 hover:bg-gray-50"
+                                className="group relative px-6 py-4 bg-white hover:bg-gray-50 cursor-pointer"
+                                onClick={() => onSelectGroup(group.id)}
                             >
-                                {/* ... card content ... */}
-                                {editingGroupId === group.id ? (
-                                    <input
-                                        type="text" value={currentTitle} onChange={(e) => setCurrentTitle(e.target.value)}
-                                        onBlur={handleSave} onKeyDown={handleKeyDown} autoFocus
-                                        className="text-lg font-semibold bg-gray-100 p-1 rounded focus:outline-none w-full"
-                                    />
-                                ) : (
-                                    <div onClick={() => onSelectGroup(group.id)} className="flex-grow cursor-pointer">
-                                        <p className="text-lg font-semibold text-gray-800 transition-colors">
-                                            {group.title}
-                                        </p>
-                                        <p className="text-sm text-gray-500 mt-1">{group.policies.length} policies</p>
-                                    </div>
-                                )}
-
-                                {editingGroupId !== group.id && (
-                                    <button onClick={() => handleEditClick(group)} className="opacity-0 group-hover:opacity-100 transition-opacity p-2">
-                                        <EditIcon />
-                                    </button>
-                                )}
+                                <div>
+                                    <p className="text-base font-medium text-gray-900 transition-colors">
+                                        {group.title}
+                                    </p>
+                                    <p className="text-sm text-gray-500 mt-0.5">{group.policies.length} policies</p>
+                                </div>
+                                <button
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        onDeleteGroup(group.id);
+                                    }}
+                                    className="absolute right-6 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 p-2 rounded-md hover:bg-red-50 text-gray-400 hover:text-red-600"
+                                    aria-label="Delete group"
+                                >
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                    </svg>
+                                </button>
                             </div>
                         ))}
                     </div>

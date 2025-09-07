@@ -1,0 +1,70 @@
+{
+  "groups": [
+    {
+      "id": "group-1",
+      "title": "Travel & Expense Policy",
+      "policies": [
+        {
+          "id": "policy-1a",
+          "title": "Air Travel Guidelines",
+          "description": "• Economy class for flights under 6 hours\n• Premium economy allowed for flights 6-10 hours\n• Business class permitted for flights over 10 hours or red-eye flights over 4 hours\n• First class requires C-Suite approval\n• Book flights at least 14 days in advance when possible\n• Use preferred airline partners for corporate discounts",
+          "hiddenNotes": "VP level and above automatically approved for business class on all international flights. C-Suite exempt from advance booking requirements."
+        },
+        {
+          "id": "policy-1b",
+          "title": "Hotel & Accommodation",
+          "description": "• Maximum nightly rate: $250 (Tier 1 cities: NYC, SF, London, Tokyo)\n• Maximum nightly rate: $175 (Tier 2 cities)\n• Maximum nightly rate: $125 (All other locations)\n• Book through corporate travel portal for negotiated rates\n• Incidentals covered up to $25/day\n• Extended stays over 30 days require special approval",
+          "hiddenNotes": "Directors and above have 50% higher limits. Executive team has no preset limits but must be reasonable."
+        },
+        {
+          "id": "policy-1c",
+          "title": "Meals & Entertainment",
+          "description": "• Breakfast: $25 per person\n• Lunch: $35 per person\n• Dinner: $65 per person\n• Client entertainment: $150 per person (requires pre-approval for amounts over $500 total)\n• Team events: $75 per person\n• Alcohol permitted but must not exceed 30% of total bill\n• Tips maximum 20% (25% for exceptional service)",
+          "hiddenNotes": "Sales team has 2x limits for client entertainment. No alcohol restrictions for C-Suite client dinners."
+        },
+        {
+          "id": "policy-1d",
+          "title": "Ground Transportation",
+          "description": "• Use public transit or shuttle services when available\n• Standard taxi/rideshare for trips under 25 miles\n• Rental cars: Mid-size or below (SUV/luxury requires justification)\n• Airport parking: Long-term economy lots preferred\n• Personal vehicle mileage: $0.65 per mile\n• No limo services without VP approval",
+          "hiddenNotes": "C-Suite and Board members may use executive car service. International visitors at Director+ level eligible for car service."
+        },
+        {
+          "id": "policy-1e",
+          "title": "Expense Submission & Reimbursement",
+          "description": "• Submit expenses within 30 days of travel completion\n• Receipts required for all expenses over $25\n• Corporate card mandatory for all business expenses over $100\n• Personal expenses must be separated and marked clearly\n• Foreign currency converted at date of expense\n• Reimbursement processed within 10 business days of approval",
+          "hiddenNotes": "Executive assistants may submit on behalf of C-Suite. Board member expenses reviewed by CFO only."
+        }
+      ]
+    },
+    {
+      "id": "group-2",
+      "title": "Procurement & Vendor Management Policy",
+      "policies": [
+        {
+          "id": "policy-2a",
+          "title": "Purchase Approval Thresholds",
+          "description": "• Under $1,000: Manager approval\n• $1,000 - $10,000: Director approval\n• $10,000 - $50,000: VP approval + Finance review\n• $50,000 - $250,000: C-Suite approval + CFO sign-off\n• Over $250,000: CEO approval + Board notification\n• All software purchases require IT security review\n• All contracts require Legal review",
+          "hiddenNotes": "Emergency purchases may bypass one level with retroactive approval. CEO may approve up to $1M without Board."
+        },
+        {
+          "id": "policy-2b",
+          "title": "Vendor Selection Requirements",
+          "description": "• 3 competitive bids required for purchases over $25,000\n• Vendor must pass security assessment for data access\n• Preferred vendor list must be checked first\n• New vendors require W-9 and insurance certificates\n• International vendors need additional compliance review\n• Annual vendor performance reviews required\n• Conflict of interest disclosure mandatory",
+          "hiddenNotes": "Sole source justification accepted for specialized services. Existing vendor relationships may waive bid requirements with VP approval."
+        }
+      ]
+    },
+    {
+      "id": "group-3",
+      "title": "IT & Technology Policy",
+      "policies": [
+        {
+          "id": "policy-3a",
+          "title": "Software & Subscriptions",
+          "description": "• All software must be approved by IT Security before purchase\n• SaaS subscriptions require annual review for usage\n• Open source software needs security scan and Legal review\n• Personal software prohibited on company devices\n• Cloud storage must be corporate-approved platforms only\n• API integrations require architecture review\n• License compliance audited quarterly",
+          "hiddenNotes": "Development team may use unapproved tools in sandboxed environments. C-Suite may have personal productivity apps with IT knowledge."
+        }
+      ]
+    }
+  ]
+}

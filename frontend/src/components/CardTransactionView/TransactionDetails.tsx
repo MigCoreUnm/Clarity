@@ -1,5 +1,5 @@
 import React from "react";
-import type { Transaction } from "../CardTransactionTable/CardTransactionTable";
+import type { Transaction } from "../../types2";
 
 export default function TransactionDetails({
   transaction,
@@ -24,23 +24,15 @@ export default function TransactionDetails({
   );
 
   return (
-    <div className="relative border border-gray-200 overflow-hidden">
-      {/* Absolute vertical divider spanning header + rows */}
-      <div className="pointer-events-none absolute left-6 right-6 top-0 bottom-0 z-0">
-        <div
-          style={{ left: `${200}px` }}
-          className="absolute top-0 bottom-0 w-px bg-gray-200"
-        />
-      </div>
-
-      {/* Header */}
-      <div className="flex items-center justify-between bg-gray-50 text-gray-900 px-6 py-3 border-b border-gray-200">
+    <div className="relative overflow-hidden">
+      {/* Header (no borders, lighter look) */}
+      <div className="flex items-center justify-between text-gray-900 px-6 py-2">
         <div className="font-medium">Requirements</div>
         <div />
       </div>
 
-      {/* Body */}
-      <div className="divide-y divide-gray-200">
+      {/* Body (no borders/dividers) */}
+      <div className="space-y-1">
         {mockFields.map((f) => (
           <FieldRow
             key={f.label}
@@ -64,12 +56,9 @@ function FieldRow({
   initialValue: string;
 }) {
   const [value, setValue] = React.useState<string>(initialValue);
-  const [savedValue, setSavedValue] = React.useState<string>(initialValue);
   React.useEffect(() => {
     setValue(initialValue);
-    setSavedValue(initialValue);
   }, [initialValue]);
-  const hasChanges = value !== savedValue;
 
   return (
     <div
@@ -77,23 +66,12 @@ function FieldRow({
       style={{ gridTemplateColumns: gridTemplate }}
     >
       <div className="text-sm text-gray-600">{label}</div>
-      <div className="flex items-center justify-between gap-3 pl-4">
+      <div className="flex items-center gap-3 pl-4">
         <input
           value={value}
           onChange={(e) => setValue(e.target.value)}
-          className="w-full max-w-md rounded border border-gray-300 px-3 py-1.5 text-sm bg-white outline-none focus:outline-none focus:ring-0 focus:border-gray-300"
+          className="w-full max-w-md px-0 py-1.5 text-sm bg-transparent outline-none border-0 focus:outline-none focus:ring-0"
         />
-        <button
-          disabled={!hasChanges}
-          onClick={() => setSavedValue(value)}
-          className={`text-sm rounded px-3 py-1.5 ${
-            hasChanges
-              ? "text-gray-700 border border-gray-300 hover:bg-gray-50"
-              : "text-gray-400 border border-gray-200 cursor-default"
-          }`}
-        >
-          Save
-        </button>
       </div>
     </div>
   );

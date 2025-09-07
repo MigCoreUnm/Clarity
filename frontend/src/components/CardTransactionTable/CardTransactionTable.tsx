@@ -1,276 +1,291 @@
 import React from "react";
 import CardTransactionRow from "./CardTransactionRow";
-
-type Transaction = {
-  id: string;
-  groupOwner?: boolean;
-  merchantInitials: string;
-  merchantName: string;
-  merchantCategory: string;
-  date: string;
-  amount: string;
-  policyStatus: "In policy" | "Out of policy" | "Needs review";
-  approvalStatus: "Approved" | "Pending" | "Rejected";
-  receiptThumbUrl?: string;
-  memo: string;
-};
+import type { Transaction } from "../../types2";
 
 const SAMPLE_TRANSACTIONS: Transaction[] = [
-  // Group 1: Angela Martin - Client Entertainment
+  // Group: Kevin Malone - Office Party Supplies
   {
-    id: "1",
+    id: "27",
+    groupOwner: true,
+    merchantInitials: "KM",
+    merchantName: "Kevin Malone",
+    merchantCategory: "",
+    date: "Sep 5, 2025",
+    amount: "$100.00 USD",
+    policyStatus: "Out of policy",
+    approvalStatus: "Pending",
+    receiptThumbUrl: undefined,
+    memo: "Office Party Supplies",
+  },
+  {
+    id: "28",
+    merchantInitials: "P",
+    merchantName: "Publix",
+    merchantCategory: "Groceries",
+    date: "Sep 5, 2025",
+    amount: "$100.00 USD",
+    policyStatus: "Out of policy",
+    approvalStatus: "Rejected",
+    receiptThumbUrl: "/receipts/reciept1.jpg",
+    memo: "Office Party Supplies",
+  },
+
+  // Group: Phyllis Vance - Client Lunch
+  {
+    id: "23",
+    groupOwner: true,
+    merchantInitials: "PV",
+    merchantName: "Phyllis Vance",
+    merchantCategory: "",
+    date: "Apr 5, 2024",
+    amount: "$45.00 USD",
+    policyStatus: "In policy",
+    approvalStatus: "Approved",
+    receiptThumbUrl: undefined,
+    memo: "Client Lunch",
+  },
+  {
+    id: "24",
+    merchantInitials: "JD",
+    merchantName: "Joe's Diner",
+    merchantCategory: "Restaurants",
+    date: "Apr 5, 2024",
+    amount: "$45.00 USD",
+    policyStatus: "In policy",
+    approvalStatus: "Approved",
+    receiptThumbUrl: "/receipts/reciept3.png",
+    memo: "Client Lunch",
+  },
+
+  // Group: Kelly Kapoor - Corporate Gifting
+  {
+    id: "25",
+    groupOwner: true,
+    merchantInitials: "KK",
+    merchantName: "Kelly Kapoor",
+    merchantCategory: "",
+    date: "Sep 5, 2025",
+    amount: "$95.29 USD",
+    policyStatus: "Needs review",
+    approvalStatus: "Pending",
+    receiptThumbUrl: undefined,
+    memo: "Corporate Gifting",
+  },
+  {
+    id: "26",
+    merchantInitials: "M",
+    merchantName: "Marshalls",
+    merchantCategory: "Department Store",
+    date: "Sep 5, 2025",
+    amount: "$95.29 USD",
+    policyStatus: "Needs review",
+    approvalStatus: "Pending",
+    receiptThumbUrl: "/receipts/reciept4.jpeg",
+    memo: "Corporate Gifting",
+  },
+
+  // Group: Angela Martin - Transport to Client
+  {
+    id: "29",
     groupOwner: true,
     merchantInitials: "AM",
     merchantName: "Angela Martin",
     merchantCategory: "",
-    date: "Jul 7, 2025",
-    amount: "$1,425.30 USD",
+    date: "Dec 4, 2015",
+    amount: "$12.00 USD",
     policyStatus: "In policy",
     approvalStatus: "Approved",
     receiptThumbUrl: undefined,
-    memo: "",
+    memo: "Transport to Client",
   },
   {
-    id: "2",
-    merchantInitials: "U",
-    merchantName: "Uluh",
-    merchantCategory: "Restaurants",
-    date: "Jul 7, 2025",
-    amount: "$712.65 USD",
-    policyStatus: "In policy",
-    approvalStatus: "Pending",
-    receiptThumbUrl: "/public/vite.svg",
-    memo: "Client dinner",
-  },
-  {
-    id: "3",
+    id: "30",
     merchantInitials: "L",
     merchantName: "Lyft",
     merchantCategory: "Taxi and Rideshare",
-    date: "Jul 7, 2025",
-    amount: "$78.00 USD",
+    date: "Dec 4, 2015",
+    amount: "$12.00 USD",
     policyStatus: "In policy",
-    approvalStatus: "Pending",
-    receiptThumbUrl: undefined,
-    memo: "Transport to client dinner",
+    approvalStatus: "Approved",
+    receiptThumbUrl: "/receipts/receipt 5.webp",
+    memo: "Transport to Client",
   },
+
+  // Group: Stanley Hudson - Business Travel
   {
-    id: "4",
-    merchantInitials: "NY",
-    merchantName: "N.Y. Grill & Deli",
-    merchantCategory: "Restaurants",
-    date: "Jul 7, 2025",
-    amount: "$634.65 USD",
-    policyStatus: "Out of policy",
-    approvalStatus: "Rejected",
-    receiptThumbUrl: undefined,
-    memo: "Exceeded per-person limit",
-  },
-  
-  // Group 2: Michael Scott - Conference Travel
-  {
-    id: "5",
+    id: "31",
     groupOwner: true,
-    merchantInitials: "MS",
-    merchantName: "Michael Scott",
+    merchantInitials: "SH",
+    merchantName: "Stanley Hudson",
     merchantCategory: "",
-    date: "Jul 10, 2025",
-    amount: "$2,156.43 USD",
+    date: "Nov 20, 2019",
+    amount: "$43.83 USD",
     policyStatus: "In policy",
     approvalStatus: "Approved",
     receiptThumbUrl: undefined,
-    memo: "",
+    memo: "Business Travel",
   },
   {
-    id: "6",
-    merchantInitials: "UA",
-    merchantName: "United Airlines",
-    merchantCategory: "Airlines",
-    date: "Jul 10, 2025",
-    amount: "$892.00 USD",
-    policyStatus: "In policy",
-    approvalStatus: "Approved",
-    receiptThumbUrl: "/public/vite.svg",
-    memo: "Flight to NYC conference",
-  },
-  {
-    id: "7",
-    merchantInitials: "HI",
-    merchantName: "Hilton Hotels",
-    merchantCategory: "Hotels & Lodging",
-    date: "Jul 11, 2025",
-    amount: "$1,264.43 USD",
-    policyStatus: "Needs review",
-    approvalStatus: "Pending",
-    receiptThumbUrl: "/public/vite.svg",
-    memo: "3 nights accommodation",
-  },
-  
-  // Group 3: Pam Beesly - Office Supplies
-  {
-    id: "8",
-    groupOwner: true,
-    merchantInitials: "PB",
-    merchantName: "Pam Beesly",
-    merchantCategory: "",
-    date: "Jul 12, 2025",
-    amount: "$487.23 USD",
-    policyStatus: "In policy",
-    approvalStatus: "Approved",
-    receiptThumbUrl: undefined,
-    memo: "",
-  },
-  {
-    id: "9",
-    merchantInitials: "OS",
-    merchantName: "Office Supply Co",
-    merchantCategory: "Office Supplies",
-    date: "Jul 12, 2025",
-    amount: "$234.56 USD",
-    policyStatus: "In policy",
-    approvalStatus: "Approved",
-    receiptThumbUrl: undefined,
-    memo: "Printer paper and toner",
-  },
-  {
-    id: "10",
-    merchantInitials: "BB",
-    merchantName: "Best Buy",
-    merchantCategory: "Electronics",
-    date: "Jul 12, 2025",
-    amount: "$252.67 USD",
-    policyStatus: "Needs review",
-    approvalStatus: "Pending",
-    receiptThumbUrl: "/public/vite.svg",
-    memo: "Wireless mouse and keyboards",
-  },
-  
-  // Group 4: Jim Halpert - Team Building Event
-  {
-    id: "11",
-    groupOwner: true,
-    merchantInitials: "JH",
-    merchantName: "Jim Halpert",
-    merchantCategory: "",
-    date: "Jul 15, 2025",
-    amount: "$1,845.00 USD",
-    policyStatus: "Out of policy",
-    approvalStatus: "Rejected",
-    receiptThumbUrl: undefined,
-    memo: "",
-  },
-  {
-    id: "12",
-    merchantInitials: "TG",
-    merchantName: "TopGolf",
-    merchantCategory: "Entertainment",
-    date: "Jul 15, 2025",
-    amount: "$1,200.00 USD",
-    policyStatus: "Out of policy",
-    approvalStatus: "Rejected",
-    receiptThumbUrl: undefined,
-    memo: "Team building - unapproved venue",
-  },
-  {
-    id: "13",
-    merchantInitials: "DD",
-    merchantName: "DoorDash",
-    merchantCategory: "Food Delivery",
-    date: "Jul 15, 2025",
-    amount: "$345.00 USD",
-    policyStatus: "Out of policy",
-    approvalStatus: "Rejected",
-    receiptThumbUrl: "/public/vite.svg",
-    memo: "Food delivery for team event",
-  },
-  {
-    id: "14",
-    merchantInitials: "UB",
+    id: "32",
+    merchantInitials: "U",
     merchantName: "Uber",
     merchantCategory: "Taxi and Rideshare",
-    date: "Jul 15, 2025",
-    amount: "$300.00 USD",
+    date: "Nov 20, 2019",
+    amount: "$43.83 USD",
+    policyStatus: "In policy",
+    approvalStatus: "Approved",
+    receiptThumbUrl: "/receipts/recipet6.png",
+    memo: "Business Travel",
+  },
+
+  // Group: Creed Bratton - Team Lunch
+  {
+    id: "33",
+    groupOwner: true,
+    merchantInitials: "CB",
+    merchantName: "Creed Bratton",
+    merchantCategory: "",
+    date: "Sep 5, 2025",
+    amount: "$27.00 USD",
+    policyStatus: "Needs review",
+    approvalStatus: "Pending",
+    receiptThumbUrl: undefined,
+    memo: "Team Lunch",
+  },
+  {
+    id: "34",
+    merchantInitials: "FC",
+    merchantName: "Flew the Coop",
+    merchantCategory: "Food Delivery",
+    date: "Sep 5, 2025",
+    amount: "$27.00 USD",
+    policyStatus: "Needs review",
+    approvalStatus: "Pending",
+    receiptThumbUrl: "/receipts/reciept7.jpeg",
+    memo: "Team Lunch",
+  },
+
+  // Group: Mohammed Khan - Dubai Business Trip
+  {
+    id: "receipt-1-owner",
+    groupOwner: true,
+    merchantInitials: "MK",
+    merchantName: "Mohammed Khan",
+    merchantCategory: "",
+    date: "Feb 17, 2011",
+    amount: "$1,285.00 USD",
+    policyStatus: "In policy",
+    approvalStatus: "Approved",
+    receiptThumbUrl: undefined,
+    memo: "Dubai Business Trip - Q1 2011",
+  },
+  {
+    id: "receipt-1",
+    merchantInitials: "EM",
+    merchantName: "Emirates Airlines",
+    merchantCategory: "Airlines",
+    date: "Feb 17, 2011",
+    amount: "$1,285.00 USD",
+    policyStatus: "In policy",
+    approvalStatus: "Approved",
+    receiptThumbUrl: "/receipts/receipt8.jpg",
+    memo: "Round-trip Economy DXB-KHI for client meetings",
+  },
+
+  // Group: Star Flyer Team - Japan Office Setup
+  {
+    id: "receipt-2-owner",
+    groupOwner: true,
+    merchantInitials: "SF",
+    merchantName: "Star Flyer Team",
+    merchantCategory: "",
+    date: "Jul 12, 2023",
+    amount: "$27,610.00 USD",
+    policyStatus: "Needs review",
+    approvalStatus: "Pending",
+    receiptThumbUrl: undefined,
+    memo: "Japan Office Relocation Expenses",
+  },
+  {
+    id: "receipt-2",
+    merchantInitials: "SF",
+    merchantName: "Star Flyer Inc",
+    merchantCategory: "Airlines",
+    date: "Jul 12, 2023",
+    amount: "$27,610.00 USD",
+    policyStatus: "Needs review",
+    approvalStatus: "Pending",
+    receiptThumbUrl: "/receipts/receipt9.jpg",
+    memo: "Bulk airfare for 10 employees - Japan office setup (includes ¥810 consumption tax)",
+  },
+
+  // Group: Pamela Wong - Personal Entertainment
+  {
+    id: "receipt-3-owner",
+    groupOwner: true,
+    merchantInitials: "PW",
+    merchantName: "Pamela Wong",
+    merchantCategory: "",
+    date: "Sep 11, 2014",
+    amount: "$8.99 USD",
     policyStatus: "Out of policy",
     approvalStatus: "Rejected",
     receiptThumbUrl: undefined,
-    memo: "Transportation for team",
+    memo: "Subscription Services",
   },
-  
-  // Group 5: Dwight Schrute - Client Visits
   {
-    id: "15",
+    id: "receipt-3",
+    merchantInitials: "NF",
+    merchantName: "Netflix",
+    merchantCategory: "Entertainment",
+    date: "Sep 11, 2014",
+    amount: "$8.99 USD",
+    policyStatus: "Out of policy",
+    approvalStatus: "Rejected",
+    receiptThumbUrl: "/receipts/receipt10.jpg",
+    memo: "Netflix subscription - Personal entertainment (non-reimbursable)",
+  },
+
+  // Group: Tech Equipment Purchase - Q4 2021
+  {
+    id: "receipt-4-owner",
     groupOwner: true,
-    merchantInitials: "DS",
-    merchantName: "Dwight Schrute",
+    merchantInitials: "TT",
+    merchantName: "Tech Team",
     merchantCategory: "",
-    date: "Jul 18, 2025",
-    amount: "$923.18 USD",
+    date: "Oct 6, 2021",
+    amount: "$596.35 USD",
     policyStatus: "In policy",
     approvalStatus: "Approved",
     receiptThumbUrl: undefined,
-    memo: "",
+    memo: "Mobile Device Procurement",
   },
   {
-    id: "16",
-    merchantInitials: "EN",
-    merchantName: "Enterprise Rent-A-Car",
-    merchantCategory: "Car Rental",
-    date: "Jul 18, 2025",
-    amount: "$456.78 USD",
+    id: "receipt-4",
+    merchantInitials: "AP",
+    merchantName: "Apple Store",
+    merchantCategory: "Technology",
+    date: "Oct 6, 2021",
+    amount: "$596.35 USD",
     policyStatus: "In policy",
     approvalStatus: "Approved",
-    receiptThumbUrl: "/public/vite.svg",
-    memo: "3-day rental for client visits",
-  },
-  {
-    id: "17",
-    merchantInitials: "SH",
-    merchantName: "Shell",
-    merchantCategory: "Gas Stations",
-    date: "Jul 19, 2025",
-    amount: "$87.40 USD",
-    policyStatus: "In policy",
-    approvalStatus: "Approved",
-    receiptThumbUrl: undefined,
-    memo: "Fuel for rental car",
-  },
-  {
-    id: "18",
-    merchantInitials: "CP",
-    merchantName: "Chili's",
-    merchantCategory: "Restaurants",
-    date: "Jul 19, 2025",
-    amount: "$379.00 USD",
-    policyStatus: "Needs review",
-    approvalStatus: "Pending",
-    receiptThumbUrl: "/public/vite.svg",
-    memo: "Client lunch meeting",
+    receiptThumbUrl: "/receipts/receipt11.jpg",
+    memo: "AirPods Max Space Gray - Remote work equipment (includes $47.35 tax)",
   },
 ];
 
 export default function CardTransactionTable({
   onOpenTransaction,
-  transactions = SAMPLE_TRANSACTIONS,
+  transactions = [],
+  onDeleteGroup,
+  onDeleteTransaction,
 }: {
   onOpenTransaction?: (id: string) => void;
   transactions?: Transaction[];
+  onDeleteGroup?: (groupId: string) => void;
+  onDeleteTransaction?: (id: string) => void;
 }) {
-  // Keep the grid template in one place to align header, rows, and dividers
-  const gridTemplate =
-    "92px 456px 205px 223px 223px 104px 205px 155px 15px";
-
-  // Compute cumulative left offsets for vertical dividers based on the template above.
-  // Since we have fixed pixel columns, we can hardcode the cumulative sums to keep things simple and avoid layout reads.
-  const dividerPositionsPx = [
-    92, // after Select
-    92 + 456, // after Merchant
-    92 + 456 + 205, // after Date
-    92 + 456 + 205 + 223, // after Amount
-    92 + 456 + 205 + 223 + 223, // after Policy
-    92 + 456 + 205 + 223 + 223 + 104, // after Receipt
-    92 + 456 + 205 + 223 + 223 + 104 + 205, // after Memo
-    92 + 456 + 205 + 223 + 223 + 104 + 205 + 155, // after Actions
-  ];
+  // Responsive grid templates are defined in classNames for each breakpoint
 
   // Selection state for individual transactions (non-group rows)
   const selectableIds = React.useMemo(
@@ -342,30 +357,14 @@ export default function CardTransactionTable({
   };
 
   return (
-    <div className="relative rounded-none border-y border-gray-200 overflow-hidden">
-      {/* Absolute vertical dividers that span header + body + footer */}
-      <div className="pointer-events-none absolute left-6 right-6 top-0 bottom-0 z-0">
-        {dividerPositionsPx.map((leftPx, idx) => (
-          <div
-            key={idx}
-            style={{ left: `${leftPx}px` }}
-            className="absolute top-0 bottom-0 w-px bg-gray-200"
-          />
-        ))}
-      </div>
-
-      {/* Overlay the first divider (between Select and Merchant) above rows */}
-      <div className="pointer-events-none absolute left-6 right-6 top-0 bottom-0 z-20">
-        <div
-          style={{ left: `${dividerPositionsPx[0]}px` }}
-          className="absolute top-0 bottom-0 w-px bg-gray-200"
-        />
-      </div>
+    <div className="relative rounded-none border-y border-gray-200 overflow-x-auto">
 
       {/* Header */}
       <div
-        className="grid items-center bg-gray-50 text-gray-600 text-xs tracking-wide px-6 py-3"
-        style={{ gridTemplateColumns: gridTemplate }}
+        className="grid items-center bg-gray-50 text-gray-600 text-xs tracking-wide px-6 py-3 min-w-fit
+                   grid-cols-[minmax(50px,0.5fr)_minmax(150px,3fr)_minmax(100px,1.5fr)_minmax(120px,1.5fr)_15px]
+                   md:grid-cols-[minmax(60px,0.5fr)_minmax(180px,2.5fr)_minmax(90px,1fr)_minmax(100px,1.2fr)_minmax(130px,1.3fr)_minmax(60px,0.5fr)_minmax(120px,1.5fr)_15px]
+                   lg:grid-cols-[minmax(60px,0.5fr)_minmax(200px,2fr)_minmax(100px,1fr)_minmax(100px,1fr)_minmax(140px,1.2fr)_minmax(60px,0.5fr)_minmax(120px,1.5fr)_minmax(100px,1fr)_15px]"
       >
         <div className="flex items-center justify-center px-2">
           <input
@@ -379,12 +378,12 @@ export default function CardTransactionTable({
           />
         </div>
         <div className="px-3">Merchant</div>
-        <div className="text-left px-3">Date</div>
+        <div className="text-left px-3 hidden md:block">Date</div>
         <div className="text-right px-3">Amount</div>
-        <div className="text-left px-3">Policy assessment</div>
-        <div className="text-center px-2">Receipt</div>
-        <div className="text-left px-3">Memo</div>
-        <div className="text-left px-3">Actions</div>
+        <div className="text-left px-3">Policy</div>
+        <div className="text-center px-2 hidden md:block">Receipt</div>
+        <div className="text-left px-3 hidden md:block">Memo</div>
+        <div className="text-left px-3 hidden lg:block">Actions</div>
         <div className="text-center px-2">&nbsp;</div>
       </div>
 
@@ -416,6 +415,8 @@ export default function CardTransactionTable({
                     : undefined
                 }
                 onOpen={onOpenTransaction}
+                onDeleteGroup={onDeleteGroup}
+                onDeleteTransaction={onDeleteTransaction}
               />
             </React.Fragment>
           );
@@ -425,7 +426,7 @@ export default function CardTransactionTable({
   );
 }
 
-export type { Transaction };
+export type { Transaction } from "../../types2";
 export { SAMPLE_TRANSACTIONS };
 
 
