@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import type { Transaction } from "../CardTransactionTable/CardTransactionTable";
 import { api } from "../../services/api";
 
@@ -15,7 +15,7 @@ export default function AIPolicyMatcher({
     try {
       const updatedTransaction = await api.reanalyzeTransaction(transaction.id);
       if (onTransactionUpdate) {
-        onTransactionUpdate(updatedTransaction);
+        onTransactionUpdate(updatedTransaction as Transaction);
       }
       // Force a page reload to show the updated data
       window.location.reload();
@@ -28,7 +28,7 @@ export default function AIPolicyMatcher({
 
   const isApproved = transaction.approvalStatus === "Approved";
   const isRejected = transaction.approvalStatus === "Rejected";
-  const isPending = transaction.approvalStatus === "Pending";
+  // const isPending = transaction.approvalStatus === "Pending";
   
   // Determine colors based on approval status
   const borderColor = isApproved ? "border-green-200" : isRejected ? "border-red-200" : "border-yellow-200";

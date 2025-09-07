@@ -12,7 +12,7 @@ interface AllPoliciesViewProps {
     onBack: () => void;
 }
 
-export const AllPoliciesView: React.FC<AllPoliciesViewProps> = ({ groups, onSelectGroup, onAddNewGroup, onUpdateGroupTitle, onDeleteGroup, onBack }) => {
+export const AllPoliciesView: React.FC<AllPoliciesViewProps> = ({ groups, onSelectGroup, onAddNewGroup, onDeleteGroup, onBack }) => {
 
 
     return (

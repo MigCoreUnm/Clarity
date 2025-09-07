@@ -147,26 +147,26 @@ export default function AIPolicySuggestion({
     return `Consider applying your standard policy for ${category}. Prefill memo with merchant: ${merchant}. Amount is ${amount}.`;
   })();
 
-  const handleRefresh = async () => {
-    setIsLoading(true);
-    setError(null);
+  // const handleRefresh = async () => {
+  //   setIsLoading(true);
+  //   setError(null);
     
-    try {
-      // Force refresh to get new suggestion from Toolhouse
-      const response = await api.getTransactionPolicySuggestion(transaction.id, true);
-      if (response.suggestion) {
-        setToolhouseSuggestion(response.suggestion);
+  //   try {
+  //     // Force refresh to get new suggestion from Toolhouse
+  //     const response = await api.getTransactionPolicySuggestion(transaction.id, true);
+  //     if (response.suggestion) {
+  //       setToolhouseSuggestion(response.suggestion);
         
-      } else {
-        setError("No policy suggestion available");
-      }
-    } catch (err) {
-      console.error('Failed to fetch policy suggestion:', err);
-      setError("Failed to load policy suggestions");
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  //     } else {
+  //       setError("No policy suggestion available");
+  //     }
+  //   } catch (err) {
+  //     console.error('Failed to fetch policy suggestion:', err);
+  //     setError("Failed to load policy suggestions");
+  //   } finally {
+  //     setIsLoading(false);
+  //   }
+  // };
 
   // Determine styling based on approval status
   const isRejected = transaction.approvalStatus === "Rejected";
