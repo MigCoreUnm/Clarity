@@ -1,78 +1,7 @@
-# Node dependencies
-node_modules/
-**/node_modules/
-
-# Logs
-logs
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-lerna-debug.log*
-
-# Runtime data
-pids
-*.pid
-*.seed
-*.pid.lock
-
-# Coverage
-coverage/
-*.lcov
-.nyc_output/
-
-# Build outputs
-dist/
-build/
-out/
-tmp/
-temp/
-
-# Caches
-.cache/
-.parcel-cache/
-.eslintcache
-.stylelintcache
-**/.vite/
-.turbo/
-
-# Framework outputs (keep generic)
-.next/
-.nuxt/
-.svelte-kit/
-.docusaurus/
-.vercel/
-.netlify/
-
-# TypeScript
-*.tsbuildinfo
-
-# Environment files
-.env
-.env.*
-!.env.example
-
-# Editors/IDE
-.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
-.idea/
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
 
 # OS files
 .DS_Store
 Thumbs.db
-
-# Storybook (if used)
-out-storybook/
-storybook-static/
 
 # Note: We intentionally do NOT ignore `frontend/public/receipts/` so sample assets remain tracked.
 
